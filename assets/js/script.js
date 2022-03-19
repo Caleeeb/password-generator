@@ -2,7 +2,7 @@
 let letters = Array.from("abcdefghijklmnopqrstuvwxyz");
 let upperLetters = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-let characters = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "~", "?", "."];
+let symbols = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "~", "?", "."];
 // delcrare this variable empty. later this will be filled with all of the arrays above using the array method 'concat'
 let characterPool = [];
 let passwordLength = 8;
@@ -12,7 +12,7 @@ let userPrompt = function () {
   // prompt user for length of password 
   passwordLength = prompt("How long would you like you password from 8-128?");
   // check if the length falls under the parameters set, if not restart function
-  if (passwordLength <= 8 && passwordLength >= 128) {
+  if (!(passwordLength >= 8 && passwordLength <= 128)) {
     window.alert("You need to provide a valid answer! Please try again.");
     return userPrompt();
   }
@@ -34,13 +34,13 @@ let userPrompt = function () {
       characterPool = characterPool.concat(numbers);
     }
     if (specialCharacters) {
-      characterPool = characterPool.concat(characters);
+      characterPool = characterPool.concat(symbols);
     }
     if (characterPool.length == 0) {
       alert("You must chose at least one character option.");
     }
   }
-  // generate the password
+  // generate the password after the user answers prompts
   writePassword();
 }
 
@@ -55,7 +55,7 @@ function generatePassword() {
   return password;
 }
 
-// random number generator
+// random number generator.
 var randomNumber = function (min, max) {
   var value = Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -77,5 +77,7 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
 userPrompt();
 
